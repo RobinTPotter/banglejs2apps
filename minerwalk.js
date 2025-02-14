@@ -4,10 +4,10 @@ amusing pictures triggered by steps, no use, no step counts shown.
 
 */
 
+{
+    // pictures
 
-// pictures
-
-var w1 = `
+    var w1 = `
 .........XX.....
 ......XXXXX.....
 .....XXXXX......
@@ -26,7 +26,7 @@ var w1 = `
 .......XXX......
 `;
 
-var w2 = `
+    var w2 = `
 .........XX.....
 ......XXXXX.....
 .....XXXXX......
@@ -45,7 +45,7 @@ var w2 = `
 .....XXX.XXX....
 `;
 
-var w3 = `
+    var w3 = `
 .........XX.....
 ......XXXXX.....
 .....XXXXX......
@@ -64,39 +64,65 @@ var w3 = `
 ....XXX....X....
 `;
 
-// defs 
-var scale = 6;
-var width = 16;
-var height = 16;
+    // defs 
+    var scale = 6;
+    var width = 16;
+    var height = 16;
+    var tim;
+    var diff;
 
-g.clear();
+    g.clear();
 
-var img = new Array(
-  Graphics.createImage(w1),
-  Graphics.createImage(w2),
-  Graphics.createImage(w3), 
-  Graphics.createImage(w2)
-);
+    var img = new Array(
+        Graphics.createImage(w1),
+        Graphics.createImage(w2),
+        Graphics.createImage(w3), 
+        Graphics.createImage(w2)
+    );
 
-function update() {
- i = Bangle.getStepCount()%4;
-  g.drawImage(
-    img[i],
-    g.getWidth()/2 - width*scale/2,
-    g.getHeight()/2 - height*scale/2,
-    { "scale": scale}); 
+    var i=0;
+    var laststep = Date.now();
+
+    function update() {
+        console.log("update", i);
+        i = i + 1;
+        i = i % img.length;
+        g.drawImage(
+            img[i],
+            g.getWidth()/2 - width*scale/2,
+            g.getHeight()/2 - height*scale/2,
+            { "scale": scale }
+        ); 
+    };
+
+    update();
+
+    // on step draw the willy
+    Bangle.on("step", ()=> {
+        step = Date.now();
+        diff = step - laststep;
+        laststep = step;
+        console.log(diff,i);
+    });
+
+    var lastdiff=0;
+
+    function clocker() {
+        console.log("clocker diff:", diff);
+        if (diff != undefined && diff>100) {
+            console.log("setting timer");
+            if (tim) clearInterval(tim);
+            if (diff!=lastdiff)  tim = setInterval(update, 1.0*diff/img.length);
+            lastdiff=diff;
+        }
+    }
+
+    var tim2 = setInterval(clocker, 2000);
+
+    // listen for button press, convenience to exit
+    Bangle.setUI("clock");
+
 }
-
-update();
-
-// on step draw the willy
-Bangle.on("step", ()=> {
-  update();
-});
-
-// listen for button press, convenience to exit
-Bangle.setUI("clock");
-
 /*
 
 require("Storage").write("minerwalk.info", {
