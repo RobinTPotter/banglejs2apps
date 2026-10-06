@@ -29,7 +29,7 @@ function draw(h,m,s) {
   g.clear();
   const m180 = 2*Math.PI/60;
   const h180 = 2*Math.PI/12;
-  g.drawImage(face, 87, 87, {"rotate": (s-15)*m180});
+  //g.drawImage(face, 87, 87, {"rotate": (s-15)*m180});
   g.drawImage(numerals);  
   g.drawImage(minute, 87,87, {  "rotate": (m-15)*m180 });
   g.drawImage(hour, 87,87, {  "rotate": (h-3+m/60)*h180 });
