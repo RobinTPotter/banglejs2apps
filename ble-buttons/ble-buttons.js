@@ -1,5 +1,4 @@
 // Clear any existing menus or UI elements
-BJS.removeAllListeners && BJS.removeAllListeners();
 g.clear();
 
 // Define UI colors (Bangle.js 2 theme)
@@ -19,7 +18,7 @@ const midY = H / 2;
 const buttons = [
   { label: "START",    x1: 2,        y1: 2,        x2: midX - 2, y2: midY - 2, cmd: "go" },
   { label: "STOP",     x1: midX + 2, y1: 2,        x2: W - 2,    y2: midY - 2, cmd: "stop" },
-  { label: "CONTINUE", x1: 2,        y1: midY + 2, x2: midX - 2, y2: H - 2,    cmd: "continue" },
+  { label: "CONT.",    x1: 2,        y1: midY + 2, x2: midX - 2, y2: H - 2,    cmd: "continue" },
   { label: "RESET",    x1: midX + 2, y1: midY + 2, x2: W - 2,    y2: H - 2,    cmd: "reset" }
 ];
 
