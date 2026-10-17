@@ -1,5 +1,3 @@
-// Clear any existing menus or UI elements
-g.clear();
 
 // Define UI colors (Bangle.js 2 theme)
 const COLOR_BG = "#000000";
@@ -31,6 +29,7 @@ function drawUI() {
     // Draw button background boundary box
     g.setColor(COLOR_BORDER);
     g.drawRect(b.x1, b.y1, b.x2, b.y2);
+    g.drawRect(b.x1+1, b.y1+1, b.x2-1, b.y2-1);
     
     // Draw centered text label
     g.setColor(COLOR_TEXT);
@@ -81,7 +80,10 @@ drawUI();
 require("Storage").write("ble-buttons.info", {
   "id": "ble-buttons",
   "name": "ble-buttons",
+  "icon": "ble-buttons.img",
   "src": "ble-buttons.js"
 });
+
+require("Storage").write("ble-buttons.img", require("heatshrink").decompress(atob("mEw4UBAoP/AAXvvdVAC9UFo8VBYNABY8BBYJGJEQUO1WrA4M61WsEgILB9XAgfwgeqAAPAitQgYQBgE8h2wCQOwgtQgWgBYMMhYDBh2gBYISCgEPnADBgWsBYMKwAHClgDBgeoBY0gKQQLzKYUOBYxjBAwMLnhTCL4RjBA4M4hgnCO4SWBTYOsh4nCR4SUBUQOwVIKuCBYS/IBYQAIBcw2DBYxOCnXAJggLBMwUDfIRwB+ALBPwUA0B5BAgM8BYKWCgHsRgIEBhgLBVwcoRgIEBh4LGaAgL9L4kKKYUOO40ONYULR40CQYU4gtUU4kD1QCB1kVqi/F9Wq1WwitVY4q/DqtVoDiHgILBEgIAGEQIAXA==")));
 
 */

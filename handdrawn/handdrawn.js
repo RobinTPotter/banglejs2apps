@@ -55,7 +55,7 @@ Bangle.on("backlight", tick);
 
 /*
 
-require("Storage").write("lektor-watch.info", {
+require("Storage").write("handdrawn.info", {
   "id": "handdrawn",
   "name": "handdrawn",
   "src": "handdrawn.js",
